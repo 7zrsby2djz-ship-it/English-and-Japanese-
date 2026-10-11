@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex">
+  <title>接回你的教室</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="page page--top">
+    <div class="content">
+      <h1 data-copy="setup.title"></h1>
+      <p data-copy="setup.intro"></p>
+      <noscript><p>請開啟瀏覽器的JavaScript，才能保存教室入口。</p></noscript>
+
+      <p id="load-status" class="status" role="status" aria-live="polite"></p>
+
+      <form id="url-form" novalidate>
+        <label for="chat-url" data-copy="setup.urlLabel"></label>
+        <input id="chat-url" name="chatUrl" type="url" inputmode="url"
+               autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false"
+               aria-describedby="url-help url-error">
+        <p id="url-help" class="help" data-copy="setup.privateUrlHelp"></p>
+        <p id="url-error" class="error" role="alert"></p>
+        <button id="save-button" type="submit" class="primary-action" data-copy="setup.saveAction"></button>
+      </form>
+
+      <!-- 未辨識但安全的同網域路徑：本人試開、確認後才保存 -->
+      <section id="confirm-panel" class="panel" hidden aria-labelledby="confirm-text">
+        <p id="confirm-text" tabindex="-1" data-copy="setup.unknownRoute"></p>
+        <a id="check-link" class="secondary-action" target="_blank" rel="noopener noreferrer" data-copy="setup.checkLinkAction"></a>
+        <p class="help" data-copy="setup.routeConfirmationHelp"></p>
+        <button id="confirm-button" type="button" class="primary-action" hidden data-copy="setup.confirmRouteAction"></button>
+        <p class="help" data-copy="setup.draftNote"></p>
+      </section>
+
+      <!-- 瀏覽器不能保存時：仍可這次進教室 -->
+      <section id="storage-panel" class="panel" hidden>
+        <p id="storage-text" tabindex="-1" data-copy="errors.storageUnavailable"></p>
+        <a id="storage-go" class="primary-action" rel="noreferrer" data-copy="setup.storageGoAction"></a>
+      </section>
+
+      <div class="secondary-zone">
+        <details id="iphone-help">
+          <summary data-copy="setup.iphoneHelpLabel"></summary>
+          <ol id="iphone-steps"></ol>
+          <p class="help" data-copy="setup.iphoneFootnote"></p>
+        </details>
+
+        <details id="new-classroom">
+          <summary data-copy="setup.newClassroomLabel"></summary>
+          <ol id="new-steps"></ol>
+          <p class="prompt-text" id="prompt-text"></p>
+          <button id="copy-button" type="button" class="secondary-action" data-copy="setup.copyPromptAction"></button>
+          <p id="copy-status" class="status" role="status" aria-live="polite"></p>
+          <div id="manual-copy" hidden>
+            <label for="manual-prompt" data-copy="setup.manualPromptLabel"></label>
+            <textarea id="manual-prompt" readonly></textarea>
+          </div>
+        </details>
+
+        <details id="skip">
+          <summary data-copy="setup.skipAction"></summary>
+          <p data-copy="setup.skipExplanation"></p>
+          <a id="skip-link" class="secondary-action" rel="noreferrer" data-copy="setup.skipOpenChatGPT"></a>
+        </details>
+
+        <div id="clear-zone" hidden>
+          <button id="clear-button" type="button" class="link-button" data-copy="setup.clearAction"></button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script type="module" src="js/setup.mjs"></script>
+</body>
+</html>
