@@ -1,0 +1,221 @@
+{
+  "purpose": "Offline policy cases only; no real IDs and no default URLs",
+  "policyVersion": "classroom-url/1.2",
+  "cases": [
+    {
+      "name": "basic",
+      "input": "https://chatgpt.com/c/EXAMPLE_01",
+      "expected": "known"
+    },
+    {
+      "name": "opaque-id-not-uuid",
+      "input": "https://chatgpt.com/c/abc-123_x",
+      "expected": "known"
+    },
+    {
+      "name": "trailing-slash",
+      "input": "https://chatgpt.com/c/EXAMPLE_01/",
+      "expected": "known"
+    },
+    {
+      "name": "query-fragment",
+      "input": "https://chatgpt.com/c/EXAMPLE_01?view=example#section",
+      "expected": "known"
+    },
+    {
+      "name": "trim-outer-whitespace",
+      "input": "  https://chatgpt.com/c/EXAMPLE_01  ",
+      "expected": "known"
+    },
+    {
+      "name": "normalized-host",
+      "input": "HTTPS://CHATGPT.COM/c/EXAMPLE_01",
+      "expected": "known"
+    },
+    {
+      "name": "explicit-default-port",
+      "input": "https://chatgpt.com:443/c/EXAMPLE_01",
+      "expected": "known"
+    },
+    {
+      "name": "encoded-id-character",
+      "input": "https://chatgpt.com/c/EXAMPLE%2D01",
+      "expected": "known"
+    },
+    {
+      "name": "project-candidate-unverified",
+      "input": "https://chatgpt.com/g/EXAMPLE_PROJECT/c/EXAMPLE_01",
+      "expected": "confirm"
+    },
+    {
+      "name": "future-candidate-unverified",
+      "input": "https://chatgpt.com/conversation/EXAMPLE_01?view=example",
+      "expected": "confirm"
+    },
+    {
+      "name": "unknown-extra-path",
+      "input": "https://chatgpt.com/c/EXAMPLE_01/extra",
+      "expected": "confirm"
+    },
+    {
+      "name": "empty",
+      "input": "",
+      "expected": "reject"
+    },
+    {
+      "name": "not-string",
+      "input": null,
+      "expected": "reject"
+    },
+    {
+      "name": "invalid-url",
+      "input": "not a URL",
+      "expected": "reject"
+    },
+    {
+      "name": "missing-scheme",
+      "input": "chatgpt.com/c/EXAMPLE_01",
+      "expected": "reject"
+    },
+    {
+      "name": "protocol-relative",
+      "input": "//chatgpt.com/c/EXAMPLE_01",
+      "expected": "reject"
+    },
+    {
+      "name": "http",
+      "input": "http://chatgpt.com/c/EXAMPLE_01",
+      "expected": "reject"
+    },
+    {
+      "name": "javascript",
+      "input": "javascript:alert(1)",
+      "expected": "reject"
+    },
+    {
+      "name": "data",
+      "input": "data:text/plain,example",
+      "expected": "reject"
+    },
+    {
+      "name": "suffix-host",
+      "input": "https://chatgpt.com.example.test/c/EXAMPLE_01",
+      "expected": "reject"
+    },
+    {
+      "name": "prefix-host",
+      "input": "https://examplechatgpt.com/c/EXAMPLE_01",
+      "expected": "reject"
+    },
+    {
+      "name": "subdomain",
+      "input": "https://www.chatgpt.com/c/EXAMPLE_01",
+      "expected": "reject"
+    },
+    {
+      "name": "credentials",
+      "input": "https://user:password@chatgpt.com/c/EXAMPLE_01",
+      "expected": "reject"
+    },
+    {
+      "name": "deceptive-credentials",
+      "input": "https://chatgpt.com@example.test/c/EXAMPLE_01",
+      "expected": "reject"
+    },
+    {
+      "name": "non-default-port",
+      "input": "https://chatgpt.com:444/c/EXAMPLE_01",
+      "expected": "reject"
+    },
+    {
+      "name": "legacy-domain",
+      "input": "https://chat.openai.com/c/EXAMPLE_01",
+      "expected": "reject"
+    },
+    {
+      "name": "share",
+      "input": "https://chatgpt.com/share/EXAMPLE_01",
+      "expected": "reject"
+    },
+    {
+      "name": "nested-share",
+      "input": "https://chatgpt.com/g/EXAMPLE/share/EXAMPLE_01",
+      "expected": "reject"
+    },
+    {
+      "name": "encoded-share",
+      "input": "https://chatgpt.com/%73hare/EXAMPLE_01",
+      "expected": "reject"
+    },
+    {
+      "name": "case-share",
+      "input": "https://chatgpt.com/SHARE/EXAMPLE_01",
+      "expected": "reject"
+    },
+    {
+      "name": "home",
+      "input": "https://chatgpt.com/",
+      "expected": "reject"
+    },
+    {
+      "name": "missing-id",
+      "input": "https://chatgpt.com/c/",
+      "expected": "reject"
+    },
+    {
+      "name": "login",
+      "input": "https://chatgpt.com/auth/login",
+      "expected": "reject"
+    },
+    {
+      "name": "redirect",
+      "input": "https://chatgpt.com/redirect?next=https://example.test",
+      "expected": "reject"
+    },
+    {
+      "name": "embedded-space",
+      "input": "https://chatgpt.com/c/EXAMPLE 01",
+      "expected": "reject"
+    },
+    {
+      "name": "embedded-newline",
+      "input": "https://chatgpt.com/c/EXAMPLE\n01",
+      "expected": "reject"
+    },
+    {
+      "name": "backslash",
+      "input": "https://chatgpt.com\\@example.test/c/EXAMPLE_01",
+      "expected": "reject"
+    },
+    {
+      "name": "encoded-slash",
+      "input": "https://chatgpt.com/c/EXAMPLE%2F01",
+      "expected": "reject"
+    },
+    {
+      "name": "double-encoding",
+      "input": "https://chatgpt.com/%2573hare/EXAMPLE_01",
+      "expected": "reject"
+    },
+    {
+      "name": "invalid-percent-encoding",
+      "input": "https://chatgpt.com/c/%ZZ",
+      "expected": "reject"
+    },
+    {
+      "name": "empty-path-segment",
+      "input": "https://chatgpt.com/c//EXAMPLE_01",
+      "expected": "reject"
+    },
+    {
+      "name": "auth-query",
+      "input": "https://chatgpt.com/c/EXAMPLE_01?access_token=FAKE_ONLY",
+      "expected": "reject"
+    },
+    {
+      "name": "unknown-route-auth-query",
+      "input": "https://chatgpt.com/conversation/EXAMPLE_01?ID_TOKEN=FAKE_ONLY",
+      "expected": "reject"
+    }
+  ]
+}

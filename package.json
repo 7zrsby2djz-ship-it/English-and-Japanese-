@@ -1,0 +1,14 @@
+{
+  "name": "english-japanese-classroom-door",
+  "private": true,
+  "type": "module",
+  "description": "極簡英日學習入口：一個按鈕回到自己的 ChatGPT 教學對話。",
+  "scripts": {
+    "check": "node scripts/validate_entry_contract.mjs && node scripts/check_public_site.mjs",
+    "test:e2e": "node tests/e2e.mjs",
+    "test": "npm run check && npm run test:e2e"
+  },
+  "devDependencies": {
+    "playwright": "1.56.0"
+  }
+}

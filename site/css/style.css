@@ -1,0 +1,83 @@
+/* 起點來自交接包 engineering/design_tokens.css；已補設定頁需要的樣式。無動畫、無外部字體。 */
+:root {
+  color-scheme: light;
+  --page-bg: #f8f7f3;
+  --text: #202a35;
+  --muted: #505c69;
+  --action: #153f68;
+  --action-text: #ffffff;
+  --focus: #8b3200;
+  --border: #657383;
+  --error: #8a1c1c;
+  --panel: #efede6;
+  --content-width: 26.25rem;
+  --radius: 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 100%;
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page-bg); color: var(--text); font-size: 1.125rem; overflow-wrap: anywhere; }
+.page {
+  min-height: 100vh; min-height: 100svh; display: grid; align-content: center;
+  grid-template-columns: minmax(0, 1fr);
+  /* 左右用px：放大文字時不吃掉內容寬度 */
+  padding: max(1.5rem, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right))
+           max(1.5rem, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
+}
+.page--top { align-content: start; }
+.content { min-width: 0; width: 100%; max-width: var(--content-width); margin-inline: auto; }
+h1 { font-size: 1.75rem; line-height: 1.35; margin: 0 0 .5rem; overflow-wrap: anywhere; }
+p { margin: 0 0 1rem; overflow-wrap: anywhere; }
+.secondary { color: var(--muted); }
+.small { font-size: 1rem; }
+
+.primary-action {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; min-height: 4rem; padding: 1rem 1.25rem; margin: 1.5rem 0 1rem;
+  border: 2px solid var(--action); border-radius: var(--radius);
+  background: var(--action); color: var(--action-text);
+  text-decoration: none; font: inherit; font-weight: 650; text-align: center;
+  cursor: pointer; overflow-wrap: anywhere;
+}
+.secondary-action {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; min-height: 3rem; padding: .75rem 1rem; margin: .5rem 0 1rem;
+  border: 2px solid var(--action); border-radius: .75rem;
+  background: transparent; color: var(--action);
+  text-decoration: none; font: inherit; font-weight: 600; text-align: center;
+  cursor: pointer; overflow-wrap: anywhere;
+}
+a { color: var(--action); }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--focus); outline-offset: 4px;
+}
+label { display: block; font-weight: 600; margin-bottom: .25rem; }
+input, textarea {
+  width: 100%; min-width: 0; min-height: 3rem; padding: .75rem; border: 2px solid var(--border);
+  border-radius: .5rem; font: inherit; color: var(--text); background: #fff;
+}
+textarea { min-height: 8rem; resize: vertical; }
+input[aria-invalid="true"] { border-color: var(--error); border-width: 3px; }
+.help { color: var(--muted); font-size: 1rem; margin: .5rem 0 0; }
+.error { color: var(--error); font-weight: 600; margin: .5rem 0 0; }
+.error:empty, .status:empty { display: none; }
+.error::before { content: "⚠ "; }
+.status { margin: 1rem 0; padding: .75rem 1rem; border-left: 4px solid var(--action); background: var(--panel); }
+.panel { margin: 1rem 0; padding: 1rem; border: 2px solid var(--border); border-radius: .75rem; background: #fff; }
+.panel p:last-child { margin-bottom: 0; }
+[hidden] { display: none !important; }
+
+details { margin: .75rem 0; border-top: 1px solid #c9c6bc; padding-top: .75rem; }
+summary { cursor: pointer; font-weight: 600; min-height: 2.75rem; display: list-item; padding: .5rem 0; }
+details ol { padding-left: 1.5rem; margin: .5rem 0 1rem; }
+details li { margin-bottom: .5rem; }
+.prompt-text { padding: .75rem 1rem; background: var(--panel); border-radius: .5rem; margin: .5rem 0; }
+.secondary-zone { margin-top: 2rem; }
+.link-button {
+  background: none; border: none; padding: .5rem 0; font: inherit; color: var(--action);
+  text-decoration: underline; cursor: pointer; min-height: 2.75rem;
+}
+/* 不要加入overflow:hidden或固定高度裁切放大字體。 */
